@@ -18,6 +18,8 @@ var posCollection = [
 const mapToObjectId = array => array.map(id => ObjectID(id));
 
 const getReducer = filter => (accumulator, report) => {
+    //Without an additional condition <<report[filter]>>, a null appears in the existingReports array,
+    //causing the ObjectID to take null as an attribute and create a random identifier.
     if (report[filter] && accumulator.indexOf(report[filter]) === -1) {
         accumulator.push(report[filter]);
     }
